@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <View style={styles.sectionContainer}>
-        <Text style={styles.sectionTitle}>Iniciando o Mines</Text>
+        <Text style={styles.sectionTitle}>Iniciando o Mines!</Text>
         <Text style={styles.sectionDescription}>
           Tamanho da grade:
           {params.getRowsAmount()}x{params.getColumnsAmount()}
