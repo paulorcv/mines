@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import params from './src/params';
-import Field from './src/components/Field';
+import { createMinedBoard } from './src/functions';
+import MineField from './src/components/MineField';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = this.createState();
+  }
+
+  minesAmount = () => {
+    const cols = params.getColumnsAmount();
+    const rows = params.getRowsAmount();
+    return Math.ceil(cols * rows * params.difficultLevel);
+  };
+
+  createState = () => {
+    const cols = params.getColumnsAmount();
+    const rows = params.getRowsAmount();
+    return {
+      board: createMinedBoard(rows, cols, this.minesAmount()),
+    };
+  };
+
   render() {
     return (
       <View style={styles.sectionContainer}>
@@ -12,34 +32,22 @@ class App extends Component {
           Tamanho da grade:
           {params.getRowsAmount()}x{params.getColumnsAmount()}
         </Text>
-        <Field />
-        <Field opened />
-        <Field opened nearMines={1} />
-        <Field opened nearMines={2} />
-        <Field opened nearMines={3} />
-        <Field opened nearMines={6} />
-        <Field mined />
-        <Field opened mined />
-        <Field opened mined exploded />
-        <Field flagged />
+        <View style={styles.board}>
+          <MineField board={this.state.board} />
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+  },
+  board: {
     alignItems: 'center',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    textAlign: 'center',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
+    backgroundColor: '#AAA',
   },
 });
 
