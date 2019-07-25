@@ -52,7 +52,7 @@ class App extends Component {
 
   render() {
     return (
-      <View style={styles.sectionContainer}>
+      <View style={styles.container}>
         <Text style={styles.sectionTitle}>Iniciando o Mines!</Text>
         <Text style={styles.sectionDescription}>
           Tamanho da grade:
