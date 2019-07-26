@@ -9,8 +9,10 @@ import {
   wonGame,
   showMines,
   invertFlag,
+  flagsUsed,
 } from './src/functions';
 import MineField from './src/components/MineField';
+import Header from './src/components/Header';
 
 class App extends Component {
   constructor(props) {
@@ -66,11 +68,11 @@ class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.sectionTitle}>Iniciando o Mines!</Text>
-        <Text style={styles.sectionDescription}>
-          Tamanho da grade:
-          {params.getRowsAmount()}x{params.getColumnsAmount()}
-        </Text>
+        <Header
+          flagsLeft={this.minesAmount() - flagsUsed(this.state.board)}
+          onNewGame={() => this.setState(this.createState())}
+        />
+
         <View style={styles.board}>
           <MineField
             board={this.state.board}
